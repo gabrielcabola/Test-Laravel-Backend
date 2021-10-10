@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Collection;
 use App\Models\Article;
-use Mockery\Exception;
+use http\Exception;
 
 
 /**
@@ -23,10 +23,16 @@ class ArticleRepository
         $this->articles = (null !== $articles ? $articles : (Article::create()));
     }
 
-    public function findAll(array $fields): Collection
+    /**
+     * Find All Articles
+     * @param array $fields
+     * @return Collection
+     */
+    public function findAll(array $fields = []): Collection
     {
         try {
             if (!empty($fields)) {
+                // Improve the query builder for specific fields
                 return $this->articles->select($fields)->get();
             }
             return $this->articles->all();

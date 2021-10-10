@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Api;
 
+use Database\Seeders\ArticleSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\ApiTestCase;
 use App\Repositories\ArticleRepository;
 use Mockery;
@@ -9,6 +11,23 @@ use Mockery\MockInterface;
 
 class ArticlesApiControllerTest extends ApiTestCase
 {
+    use RefreshDatabase;
+
+    //Clean Table every test
+
+    /**
+     * Return a 200 with no articles.
+     *
+     * @return void
+     */
+    public function test_empty_articles()
+    {
+        $response = $this->get($this->apiVersion . '/articles');
+        $response->assertStatus(200)
+            ->assertStatus(200)
+            ->assertExactJson(['status' => true, 'message' => 'No Articles found / empty']);
+    }
+
     /**
      * Return a valid 404.
      *
@@ -16,6 +35,7 @@ class ArticlesApiControllerTest extends ApiTestCase
      */
     public function test_example()
     {
+        $this->seed(ArticleSeeder::class);
         $response = $this->get($this->apiVersion . '/');
         $response->assertStatus(404)->assertNotFound();
     }
@@ -25,6 +45,8 @@ class ArticlesApiControllerTest extends ApiTestCase
      */
     public function test_should_return_profile_a_list_of_articles()
     {
+        //Populate table
+        $this->seed(ArticleSeeder::class);
         // setup
         $schemaHighLevel = [
             'status',
@@ -54,6 +76,8 @@ class ArticlesApiControllerTest extends ApiTestCase
      */
     public function test_json_response_data()
     {
+        //Populate table
+        $this->seed(ArticleSeeder::class);
         $response = $this->json('GET', $this->apiVersion . '/articles');
         $response
             ->assertStatus(200)
@@ -68,6 +92,8 @@ class ArticlesApiControllerTest extends ApiTestCase
      */
     public function test_exception_triggered_with_correct_response_json()
     {
+        //Populate table
+        $this->seed(ArticleSeeder::class);
         // Mock repository to create an Exception Error
         $this->instance(
             ArticleRepository::class,
@@ -81,7 +107,7 @@ class ArticlesApiControllerTest extends ApiTestCase
             $this->apiVersion . '/articles')
             ->assertStatus(200)
             ->assertJson([
-                'error' => 'Received Mockery_1_Illuminate_Support_Collection::count(), but no expectations were specified',
+                'error' => 'Received Mockery_3_Illuminate_Support_Collection::count(), but no expectations were specified',
                 'status' => false,
             ]);
     }

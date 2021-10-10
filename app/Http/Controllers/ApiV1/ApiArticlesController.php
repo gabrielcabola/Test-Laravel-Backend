@@ -28,7 +28,7 @@ class ApiArticlesController extends ApiController
         try {
             $articles = $this->repo->findAll(['manufacturer', 'model', 'articleNumber']);
             if ($articles->count() === 0) {
-                return response()->json(['status' => false, 'message' => 'No Articles found / empty']);
+                return response()->json(['status' => true, 'message' => 'No Articles found / empty']);
             }
             return response()->json([
                 'status' => true,
