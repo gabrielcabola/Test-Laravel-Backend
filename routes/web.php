@@ -16,3 +16,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('articles')->group(function () {
+    Route::get('/', function () {
+        return view('articles/index');
+    });
+    Route::get('/{id}', function () {
+        return view('articles/view');
+    });
+    Route::get('/new', function () {
+        // TODO: Show form to insert new
+    });
+    Route::post('/new', function () {
+       // TODO: Save new entity
+    });
+    Route::put('/edit', function () {
+        // TODO: Update the entity
+    });
+    Route::delete('/delete', function () {
+        // TODO: DELETE the entity
+    });
+});

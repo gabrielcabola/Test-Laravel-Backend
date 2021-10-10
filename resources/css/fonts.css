@@ -1,0 +1,13 @@
+.content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.articles {
+&__list {
+
+    &__title {
+
+     }
+ }
+}
