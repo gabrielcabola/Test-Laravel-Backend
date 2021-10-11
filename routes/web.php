@@ -19,8 +19,13 @@ Route::get('/', function () {
 });
 
 Route::prefix('articles')->group(function () {
-    Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
-    Route::get('/{id}', [ArticleController::class, 'show'])->name('articles.view');
+
+    Route::get('/', [ArticleController::class, 'index'])
+        ->name('articles.index');
+
+    Route::get('/{id}', [ArticleController::class, 'show'])
+        ->name('articles.view');
+
     Route::get('/new', function () {
         // TODO: Show form to insert new
     });

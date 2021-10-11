@@ -1,2 +1,25 @@
 @import "normalize.css";
 
+.content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.articles {
+    border-radius:8px;
+
+
+    &__list {
+         list-style: none;
+         margin: 0;
+    &__title {
+         font-size: 1rem;
+     }
+    }
+}
+
+body {
+    --bg-opacity: 1;
+    background-color: #1a202c;
+    background-color: rgba(26, 32, 44, var(--bg-opacity))
+}
