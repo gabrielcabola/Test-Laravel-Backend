@@ -56,9 +56,10 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show(int $id)
     {
-        //
+        $article = $this->repo->get($id);
+        return view('articles.view', compact('article'));
     }
 
     /**

@@ -61,4 +61,11 @@ class ArticleRepository
         }
     }
 
+    public function get(int $id) {
+        $article =  $this->articles->find($id);
+        if (! empty($article)) {
+            return $article;
+        }
+        return null;
+    }
 }

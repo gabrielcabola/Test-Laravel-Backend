@@ -13,7 +13,7 @@
                         <h3>{{ $article->manufacturer }} - {{ $article->model }}</h3>
                         <img src="{{$article->thumbImage}}" alt="{{ $article->model }}">
                         <p>
-                            <data value="{{ $article->price }}">{{ $article->price }}</data>
+                            Price: <data value="{{ $article->price }}">{{ $article->price }}</data>
                             $
                         </p>
                     </a>
@@ -26,13 +26,6 @@
 
             @include('components.paginator', ['items' => $articles])
         </section>
-    </div>
-
-    <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-
-        <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-            Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-        </div>
     </div>
 
 @endsection
