@@ -16,6 +16,7 @@ class ArticleController extends Controller
         $this->request = $request;
         $this->repo = $repo;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +29,24 @@ class ArticleController extends Controller
         return view('articles.index', compact('articles'));
 
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Article  $article
+     * @return \Illuminate\Http\Response
+     */
+    public function show(int $id)
+    {
+        $article = $this->repo->get($id);
+        return view('articles.view', compact('article'));
+    }
+
+    /*************************************************************************
+     *
+     *   T O D O S
+     *
+     */
 
     /**
      * Show the form for creating a new resource.
@@ -48,18 +67,6 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function show(int $id)
-    {
-        $article = $this->repo->get($id);
-        return view('articles.view', compact('article'));
     }
 
     /**
