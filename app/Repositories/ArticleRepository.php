@@ -1,4 +1,6 @@
-<?php namespace App\Repositories;
+<?php
+
+namespace App\Repositories;
 
 use Illuminate\Support\Collection;
 use App\Models\Article;
@@ -31,11 +33,10 @@ class ArticleRepository
     public function findAll(array $fields = []): Collection
     {
         try {
-            if (!empty($fields)) {
-                // Improve the query builder for specific fields
-                return $this->articles->select($fields)->get();
-            }
-            return $this->articles->all();
+            return $this->articles
+                ->when($fields, function ($query, $fields) {
+                    $query->select($fields);
+                })->get();
         } catch (Exception $e) {
             throw $e;
         }
@@ -49,23 +50,15 @@ class ArticleRepository
      */
     public function findAllPaginated(array $fields = [], int $totalPerPage = 10): LengthAwarePaginator
     {
-
-        return $this->articles
-            ->when($fields, function ($query, $fields) {
-                $query->select($fields);
-            })
-            ->paginate($totalPerPage);
-
-
-//        try {
-//            if (!empty($fields)) {
-//                 return $this->articles->paginate($totalPerPage)->select($fields)->get();
-//            }
-//            return $this->articles->paginate($totalPerPage)->all();
-//
-//        } catch (Exception $e) {
-//            throw $e;
-//        }
+        try {
+            return $this->articles
+                ->when($fields, function ($query, $fields) {
+                    $query->select($fields);
+                })
+                ->paginate($totalPerPage);
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
 }

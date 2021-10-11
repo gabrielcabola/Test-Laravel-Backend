@@ -10,7 +10,6 @@ use Mockery\Exception;
  * Class ArticleListReducer
  * @package App\Reducers\Api
  */
- */
 class ArticleListReducer implements Reducers
 {
     protected $allowed = ['manufacturer', 'model', 'mainImage'];

@@ -19,24 +19,12 @@
                     </a>
                 </article>
             @empty
-                <h2>No Articles found</h2>
+                <article class="empty">
+                    <h2>No Articles found</h2>
+                </article>
             @endforelse
-Showing {{ $articles->count() }} of {{ $articles->total() }}
-                @if ($articles->hasPages())
-                    @if ($articles->onFirstPage())
-                        <li class="disabled"><span>← Previous</span></li>
-                    @else
-                        <li><a href="{{ $articles->previousPageUrl() }}" rel="prev">← Previous</a></li>
-                    @endif
-                Page {{ $articles->currentpage() }} / {{ $articles->lastPage()   }}
 
-                        @if ($articles->hasMorePages())
-                            <li><a href="{{ $articles->nextPageUrl() }}" rel="next">Next →</a></li>
-                        @else
-                            <li class="disabled"><span>Next →</span></li>
-                        @endif
-                @endif
-
+            @include('components.paginator', ['items' => $articles])
         </section>
     </div>
 
