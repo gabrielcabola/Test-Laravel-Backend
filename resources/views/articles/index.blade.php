@@ -4,23 +4,40 @@
 @section('metaKeywords',  '')
 
 @section('contentSection')
-    <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
 
-        <div class="grid grid-cols-1 md:grid-cols-2">
-            <div class="p-12">
-                <div class="flex items-center">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                    <div class="ml-4 text-lg leading-7 font-semibold"><a href="/articles" class="underline text-gray-900 dark:text-white">Articles</a></div>
-                </div>
+    <div class="container">
+        <section>
+            @forelse($articles as $article)
+                <article>
+                    <a href="{{ Route('articles.view', ['id' => $article->articleNumber]) }}">
+                        <h3>{{ $article->manufacturer }} - {{ $article->model }}</h3>
+                        <img src="{{$article->thumbImage}}" alt="{{ $article->model }}">
+                        <p>
+                            <data value="{{ $article->price }}">{{ $article->price }}</data>
+                            $
+                        </p>
+                    </a>
+                </article>
+            @empty
+                <h2>No Articles found</h2>
+            @endforelse
+Showing {{ $articles->count() }} of {{ $articles->total() }}
+                @if ($articles->hasPages())
+                    @if ($articles->onFirstPage())
+                        <li class="disabled"><span>← Previous</span></li>
+                    @else
+                        <li><a href="{{ $articles->previousPageUrl() }}" rel="prev">← Previous</a></li>
+                    @endif
+                Page {{ $articles->currentpage() }} / {{ $articles->lastPage()   }}
 
-                <div class="ml-12">
-                    <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                        Manage the articles on ther store.
-                    </div>
-                </div>
-            </div>
+                        @if ($articles->hasMorePages())
+                            <li><a href="{{ $articles->nextPageUrl() }}" rel="next">Next →</a></li>
+                        @else
+                            <li class="disabled"><span>Next →</span></li>
+                        @endif
+                @endif
 
-        </div>
+        </section>
     </div>
 
     <div class="flex justify-center mt-4 sm:items-center sm:justify-between">

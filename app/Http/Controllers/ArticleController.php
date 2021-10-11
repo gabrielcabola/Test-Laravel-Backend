@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Repositories\ArticleRepository;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    protected $repo;
+    protected $request;
+
+    public function __construct(Request $request, ArticleRepository $repo)
+    {
+        $this->request = $request;
+        $this->repo = $repo;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $scope = ['articleNumber', 'manufacturer', 'model', 'price', 'articleNumber'];
+        $articles = $this->repo->findAllPaginated($scope);
+        return view('articles.index', compact('articles'));
+
     }
 
     /**

@@ -18,8 +18,7 @@
 
 <body>
 
-<div class="content relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-    <div class="ax-w-6xl mx-auto sm:px-6 lg:px-8">
+<div class="content relative flex items-top justify-ce<div class="ax-w-6xl mx-auto sm:px-6 lg:px-8">
         <a href="{{ url('articles/') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Articles</a>
         @yield('contentSection')
     </div>

@@ -7,7 +7,7 @@ use App\Reducers\Api\ArticleListReducer;
 use App\Repositories\ArticleRepository;
 
 
-class ApiArticlesController extends ApiController
+class ApiArticleController extends ApiController
 {
     protected $repo;
     protected $request;
@@ -26,7 +26,8 @@ class ApiArticlesController extends ApiController
     public function listAll(ArticleListReducer $reducer)
     {
         try {
-            $articles = $this->repo->findAll(['manufacturer', 'model', 'articleNumber']);
+            $scope = ['manufacturer', 'model', 'articleNumber'];
+            $articles = $this->repo->findAll($scope);
             if ($articles->count() === 0) {
                 return response()->json(['status' => true, 'message' => 'No Articles found / empty']);
             }
