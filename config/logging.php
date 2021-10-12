@@ -88,7 +88,7 @@ return [
         ],
 
         'errorlog' => [
-            'driver' => 'errorlog',
+            'driver' => env('LOG_CHANNEL', 'errorlog'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
