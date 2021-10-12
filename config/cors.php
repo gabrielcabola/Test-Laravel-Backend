@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*','localhost','0.0.0.0'],
+    'allowed_origins' => ['*', 'localhost', '0.0.0.0', 'th-articles-react.netlify.app'],
 
     'allowed_origins_patterns' => [],
 
