@@ -34,7 +34,7 @@
                                     {{ $article->model }}
                                 </div>
                             </div>
-                            <div class="text-gray-600 dark:text-gray-200 text-xs">
+                            <div class="invisible md:visible  text-gray-600 dark:text-gray-200 text-xs">
                                 <data value="{{ $article->price }}">{{ $article->price }}</data>
                                 $
                             </div>
@@ -47,7 +47,6 @@
                                     </path>
                                 </svg>
                             </a>
-
                     </div>
                 </article>
             @empty
