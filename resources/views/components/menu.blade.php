@@ -11,3 +11,5 @@
     <a href="{{ url('articles/') }}"
        class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Articles</a>
 @endif
+<a target="_blank" href="{{ url('/api/v1/articles') }}"
+   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">API</a>
